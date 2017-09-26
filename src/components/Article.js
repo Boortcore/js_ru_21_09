@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-
+import CommentList from './CommentList'
 class Article extends Component {
     static defaultProps = {
 
@@ -18,17 +18,20 @@ class Article extends Component {
 
     render() {
         const {article, isOpen, onButtonClick} = this.props
+        const comments = article.comments;
+        
         const body = isOpen && <section>{article.text}</section>
         return (
             <div>
                 <h2>
-                    {article.title}
+                    {article.title} <br/>
                     <button onClick={onButtonClick}>
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <CommentList comments={comments} />
             </div>
         )
     }

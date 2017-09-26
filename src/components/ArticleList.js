@@ -9,6 +9,7 @@ class ArticleList extends Component {
 
     render() {
         const {articles} = this.props
+       
         if (!articles.length) return <h3>No Articles</h3>
         const articleElements = articles.map((article) => <li key={article.id}>
             <Article article={article}
@@ -24,7 +25,11 @@ class ArticleList extends Component {
     }
 
     toggleArticle = (openArticleId) => (ev) => {
-        this.setState({openArticleId})
+        this.setState((state) => {
+            const isSameArticle = state.openArticleId === openArticleId
+            openArticleId = !isSameArticle ?  openArticleId : null
+            return {openArticleId}
+        })
     }
 }
 
