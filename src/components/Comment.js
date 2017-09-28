@@ -12,33 +12,31 @@ const stylesAuthor = {
     'textAlign': 'right',
     'paddingRight': '50px'
 }
-class Comment extends Component {
-    static defaultProps = {
 
-    };
+function Comment(props) {
 
-    static propTypes = {
-        data: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            text: PropTypes.string.isRequired,
-            user: PropTypes.string
-        })
-    }
+    const {data} = props
 
-    render() {
-        const {data} = this.props
+    return (
+            <div style={stylesContainer}>
 
-        return <div style={stylesContainer}>
+                <p>{data.text}</p>
 
-            <p>{data.text}</p>
+                <div style={stylesAuthor}>
+                    {data.user}
+                </div>
 
-            <div style={stylesAuthor}>
-                {data.user}
             </div>
-            
-        </div>
-    }
+        )
+
+
 }
 
-
+Comment.propTypes = {
+    data: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+        user: PropTypes.string
+    })
+};
 export default Comment
