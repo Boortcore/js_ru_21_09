@@ -15,7 +15,7 @@ function ArticleList(props) {
     </li>)
 
     return (
-        <ul>
+        <ul style={{ border: '1px solid black' }}>
             {articleElements}
         </ul>
     )
