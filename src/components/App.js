@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import Select from 'react-select'
 import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
-import 'react-select/dist/react-select.css'
+import CustomDayPicker from './CustomDayPicker'
+
 
 class App extends Component {
     state = {
@@ -23,8 +23,7 @@ class App extends Component {
         return (
             <div>
                 <h1>App name</h1>
-                User: <input type = 'text' value = {username} onChange = {this.handleUserChange}/>
-                <Select options={options} value={selected} onChange={this.handleChange} multi />
+                <CustomDayPicker />
                 <ArticleList articles={articles}/>
                 <ArticlesChart articles={articles}/>
             </div>
