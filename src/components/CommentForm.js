@@ -7,6 +7,11 @@ class CommentForm extends React.Component {
         formIsValid: false
     }
 
+    limits = {
+        max: 50,
+        min: 10
+    }
+    
     render() {
         return <form >
             <textarea onChange={this.handleTextEnter} cols="30" rows="10" value={this.state.text} style={this.state.formIsValid ? {} : {border: '1px solid red'}}></textarea>
@@ -21,7 +26,7 @@ class CommentForm extends React.Component {
         let textLength = e.target.value.length
         this.setState({
             text: e.target.value,
-            formIsValid: textLength > 10 && textLength < 50
+            formIsValid: textLength > this.limits.min && textLength < this.limits.max
         })
     }
 

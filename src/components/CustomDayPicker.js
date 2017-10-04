@@ -1,28 +1,25 @@
 import React from 'react'
 
-import DayPicker from 'react-day-picker'
-import DayRange from './DayRange'
+import DayPicker, { DateUtils } from 'react-day-picker'
+import moment from 'moment'
 import 'react-day-picker/lib/style.css'
 
 
 class CustomDayPicker extends React.Component {
 
     state = {
-        selectedDay: new Date(),
-        previousSelectedDay: new Date()
+        range: {
+            from: null,
+            to: null
+        }
     };
 
     handleDayClick = day => {
-        this.setState(state => {
-
-            return {
-                selectedDay: day,
-                previousSelectedDay: state.selectedDay
-            }
-        });
+        this.setState({range: DateUtils.addDayToRange(day, this.state.range)});
     };
 
     render () {
+        const {to, from} = this.state.range
         return (
             <div>
                 <DayPicker
@@ -33,9 +30,13 @@ class CustomDayPicker extends React.Component {
                           before: new Date(2017, 9, 2),
                         },
                     ]}
+                    selectedDays={
+                        [from, { from, to}]
+                    }
                 />
-
-                <DayRange current={this.state.selectedDay} previous={this.state.previousSelectedDay} />
+                <div>
+                    {from && to ? `${from.toDateString()} - ${to.toDateString()}` : 'Выберите диапазон'}
+                </div>
             </div>
         )
     }
