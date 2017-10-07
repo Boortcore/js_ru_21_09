@@ -3,7 +3,7 @@ import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
 import Filters from './Filters'
 import Counter from './Counter'
-
+import {connect} from 'react-redux'
 class App extends Component {
     state = {
         username: ''
@@ -17,7 +17,7 @@ class App extends Component {
                 <h1>App name</h1>
                 <Counter />
                 User: <input type = 'text' value = {username} onChange = {this.handleUserChange}/>
-                <Filters articles = {[]}/>
+                <Filters articles = {this.props.articles}/>
                 <ArticleList />
             </div>
         )
@@ -34,4 +34,8 @@ class App extends Component {
     }
 }
 
-export default App
+export default connect((state) => {
+    return {
+        articles: state.articles
+    }
+})(App)
