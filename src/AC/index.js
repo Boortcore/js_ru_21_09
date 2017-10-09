@@ -15,16 +15,16 @@ export function deleteArticle(id) {
     }
 }
 
-export function filterArticles(id) {
+export function filterArticles(articles) {
     return {
         type: CHANGE_SELECTED_ARTICLES,
-        payload: Object.assign(id)
+        payload: articles
     }
 }
 
-export function changeDateInterval(dateInterval) {
+export function changeDateRange(dateRange) {
     return {
         type: CHANGE_DATE_INTERVAL,
-        payload: Object.assign(dateInterval)
+        payload: dateRange
     }
 }

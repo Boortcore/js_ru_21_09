@@ -11,6 +11,7 @@ class ArticleList extends Accordion {
 
     render() {
         const {articles} = this.props
+        console.log(this.props.articles)
         if (this.state.error) return <h2>Error: {this.state.error.message}</h2>
         if (!articles.length) return <h3>No Articles</h3>
 
@@ -18,7 +19,7 @@ class ArticleList extends Accordion {
         let fromDate = this.props.dates.from
         let toDate = this.props.dates.to
         const articleElements = articles.map((article) => {
-            let dateOfArticle = new Date(article.date);
+            let dateOfArticle = new Date(article.date).setHours(0, 0, 0, 0);
             return (
                 selectedIds.includes(article.id) && dateOfArticle >= fromDate && dateOfArticle <= toDate ?
                 <li key={article.id}>
@@ -54,6 +55,6 @@ ArticleList.propTypes = {
 
 export default connect((state) => ({
     articles: state.articles,
-    selected: state.selected,
-    dates: state.dates
+    selected: state.filter.selected,
+    dates: state.filter.dates
 }))(ArticleList)
