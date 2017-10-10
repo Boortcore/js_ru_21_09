@@ -60,6 +60,7 @@ export default connect(state => {
                 new Date(article.date).setHours(0, 0, 0, 0) >= fromDate
                 || new Date(article.date).setHours(0, 0, 0, 0) <= toDate
             )
+
     })
 
     return {
