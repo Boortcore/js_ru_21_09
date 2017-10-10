@@ -55,10 +55,11 @@ export default connect(state => {
     let fromDate = state.filter.dates.from
     let toDate = state.filter.dates.to
     let articles = state.articles.filter(article => {
+        const articleDate = new Date(article.date).setHours(0, 0, 0, 0)
         return selectedIds.includes(article.id)
             && (
-                new Date(article.date).setHours(0, 0, 0, 0) >= fromDate
-                || new Date(article.date).setHours(0, 0, 0, 0) <= toDate
+                articleDate >= fromDate
+                || articleDate <= toDate
             )
 
     })
