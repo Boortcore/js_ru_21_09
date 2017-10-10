@@ -33,7 +33,7 @@ class SelectFilter extends Component {
 
 function mapStateToProps(state) {
     return {
-        selected: state.selected
+        selected: state.filter.selected
     }
 }
 export default connect(mapStateToProps, { filterArticles })(SelectFilter)
