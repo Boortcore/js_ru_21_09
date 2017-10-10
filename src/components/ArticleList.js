@@ -11,23 +11,19 @@ class ArticleList extends Accordion {
 
     render() {
         const {articles} = this.props
-        console.log(this.props.articles)
         if (this.state.error) return <h2>Error: {this.state.error.message}</h2>
         if (!articles.length) return <h3>No Articles</h3>
 
-        let selectedIds = this.props.selected.map(article => article.value)
-        let fromDate = this.props.dates.from
-        let toDate = this.props.dates.to
+
         const articleElements = articles.map((article) => {
-            let dateOfArticle = new Date(article.date).setHours(0, 0, 0, 0);
+
             return (
-                selectedIds.includes(article.id) && dateOfArticle >= fromDate && dateOfArticle <= toDate ?
                 <li key={article.id}>
                     <Article article={article}
                              isOpen={article.id === this.state.openItemId}
                              onButtonClick={this.toggleOpenItemMemoized(article.id)}
                     />
-                </li> : null
+                </li>
             )
         })
 
@@ -53,8 +49,23 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default connect((state) => ({
-    articles: state.articles,
-    selected: state.filter.selected,
-    dates: state.filter.dates
-}))(ArticleList)
+export default connect(state => {
+    console.log(state)
+    let selectedIds = state.filter.selected.map(article => article.value)
+    let fromDate = state.filter.dates.from
+    let toDate = state.filter.dates.to
+    let articles = state.articles.filter(article => {
+        return selectedIds.includes(article.id)
+            && (
+                new Date(article.date).setHours(0, 0, 0, 0) >= fromDate
+                || new Date(article.date).setHours(0, 0, 0, 0) <= toDate
+            )
+    })
+
+    return {
+        articles: articles,
+        selected: state.filter.selected,
+        dates: state.filter.dates
+    }
+})(ArticleList)
+

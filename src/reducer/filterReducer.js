@@ -4,6 +4,7 @@ let initialState = {
     dates: {from: null, to: null},
     selected: []
 }
+
 export default function filterReduser(state = initialState , action) {
     switch(action.type) {
         case CHANGE_DATE_INTERVAL:
