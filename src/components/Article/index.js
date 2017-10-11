@@ -89,12 +89,8 @@ class Article extends PureComponent {
     handleDelete = () => {
         console.log('---', 'deleting')
         this.props.deleteArticle(this.props.article.id)
-        const changedSelected = this.props.selected.filter(selected => selected.value != this.props.article.id)
-        this.props.changeSelected(changedSelected)
     }
 }
 
 
-export default connect(state => ({
-    selected: state.filter.selected
-}), { deleteArticle, changeSelected  })(Article)
+export default connect(null, { deleteArticle })(Article)
