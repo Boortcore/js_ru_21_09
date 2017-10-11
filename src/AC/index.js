@@ -15,10 +15,10 @@ export function deleteArticle(id) {
     }
 }
 
-export function filterArticles(articles) {
+export function changeSelected(selected) {
     return {
         type: CHANGE_SELECTED_ARTICLES,
-        payload: articles
+        payload: selected
     }
 }
 

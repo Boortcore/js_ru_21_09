@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 
 import {connect} from 'react-redux'
-import { filterArticles } from '../../AC'
+import { changeSelected } from '../../AC'
 import 'react-select/dist/react-select.css'
 
 class SelectFilter extends Component {
@@ -13,7 +13,7 @@ class SelectFilter extends Component {
 
 
     handleChange = selected => {
-        this.props.filterArticles(selected);
+        this.props.changeSelected(selected);
     }
 
     render() {
@@ -34,7 +34,8 @@ class SelectFilter extends Component {
 
 function mapStateToProps(state) {
     return {
-        selected: state.filter.selected
+        selected: state.filter.selected,
+        articles: state.articles
     }
 }
-export default connect(mapStateToProps, { filterArticles })(SelectFilter)
+export default connect(mapStateToProps, { changeSelected })(SelectFilter)

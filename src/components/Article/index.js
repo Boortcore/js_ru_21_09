@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import CommentList from '../CommentList'
 import {findDOMNode} from 'react-dom'
 import {connect} from 'react-redux'
-import {deleteArticle} from '../../AC'
+import {deleteArticle, changeSelected} from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
@@ -89,8 +89,12 @@ class Article extends PureComponent {
     handleDelete = () => {
         console.log('---', 'deleting')
         this.props.deleteArticle(this.props.article.id)
+        const changedSelected = this.props.selected.filter(selected => selected.value != this.props.article.id)
+        this.props.changeSelected(changedSelected)
     }
 }
 
 
-export default connect(null, { deleteArticle })(Article)
+export default connect(state => ({
+    selected: state.filter.selected
+}), { deleteArticle, changeSelected  })(Article)
