@@ -93,7 +93,7 @@ class Article extends PureComponent {
     })
 
     handleDelete = () => {
-        console.log('---', 'deleting')
+        //console.log('---', 'deleting')
         this.props.deleteArticle(this.props.article.id)
     }
 }

@@ -22,7 +22,7 @@ class ArticleList extends Accordion {
     }
 
     render() {
-        console.log('---', 'rerendering ArticleList')
+        //console.log('---', 'rerendering ArticleList')
         const {articles, loading} = this.props
         if (loading) return <Loader />
         if (this.state.error) return <h2>Error: {this.state.error.message}</h2>
@@ -42,7 +42,7 @@ class ArticleList extends Accordion {
     }
 
     componentDidCatch(error, info) {
-        console.log('---', 123, error, info)
+        //console.log('---', 123, error, info)
         this.setState({ error })
     }
 }
@@ -57,7 +57,7 @@ ArticleList.propTypes = {
 }
 
 export default connect(state => {
-    console.log('---', 'connect for ArticleList')
+    //console.log('---', 'connect for ArticleList')
     return {
         articles: filtratedArticlesSelector(state),
         loading: state.articles.loading

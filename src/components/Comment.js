@@ -30,6 +30,4 @@ const createMapStateToProps = () => {
     return mapStateToProps
 }
 
-
-
 export default connect(createMapStateToProps)(Comment)
