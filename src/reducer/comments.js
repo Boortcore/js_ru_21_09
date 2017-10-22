@@ -17,7 +17,6 @@ export default (state = new ReducerRecord, action) => {
 
     switch (type) {
         case ADD_COMMENT:
-            console.log("STATECOMMENTS", state)
             return state.setIn(['entities', randomId], new CommentRecord({...payload.comment, id: randomId }))
 
         case LOAD_COMMENTS + SUCCESS:
