@@ -5,7 +5,7 @@ import {arrToMap} from './utils'
 const CommentRecord = Record({
     id: null,
     text: null,
-    user: null,
+    user: null
 })
 
 const ReducerRecord = Record({
@@ -20,7 +20,7 @@ export default (state = new ReducerRecord, action) => {
             return state.setIn(['entities', randomId], new CommentRecord({...payload.comment, id: randomId }))
 
         case LOAD_COMMENTS + SUCCESS:
-            return state.set('entities', arrToMap(response, CommentRecord))
+            return state.update('entities', maps => maps.merge(arrToMap(response, CommentRecord)))
     }
 
     return state
