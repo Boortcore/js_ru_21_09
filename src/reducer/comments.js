@@ -10,7 +10,6 @@ const CommentRecord = Record({
 
 const ReducerRecord = Record({
     entities: new OrderedMap({}),
-    loading: false
 })
 
 export default (state = new ReducerRecord, action) => {
@@ -18,20 +17,11 @@ export default (state = new ReducerRecord, action) => {
 
     switch (type) {
         case ADD_COMMENT:
-            return state.set(randomId, {
-                ...payload.comment,
-                id: randomId
-            })
-        case LOAD_COMMENTS + START:
-            return state.set('loading', true)
+            console.log("STATECOMMENTS", state)
+            return state.setIn(['entities', randomId], new CommentRecord({...payload.comment, id: randomId }))
 
         case LOAD_COMMENTS + SUCCESS:
-
-            let res =  state
-                .set('loading', false)
-                .set('entities', arrToMap(response, CommentRecord))
-            return res
-
+            return state.set('entities', arrToMap(response, CommentRecord))
     }
 
     return state

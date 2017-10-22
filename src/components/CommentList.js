@@ -14,8 +14,12 @@ class CommentList extends Component {
         toggleOpen: PropTypes.func
     }
 
-    componentWillReceiveProps({isOpen, article, loadComments, loading}) {
-        if (!this.props.isOpen && isOpen) loadComments(article.id)
+    componentWillReceiveProps({isOpen, article, loadComments}) {
+        if (!this.props.isOpen
+                && !article.commentsIsLoaded
+                    && !article.commentsIsLoading
+                        && isOpen)
+                                loadComments(article.id)
     }
     
     render() {
@@ -36,7 +40,7 @@ class CommentList extends Component {
         if (commentsIsLoading) return <Loader />
         if (!commentsIsLoaded) return null
 
-        const body = 
+        const body =
             comments.length ? (
                 <ul>
                     {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
